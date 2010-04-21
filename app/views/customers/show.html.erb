@@ -1,0 +1,44 @@
+<p>
+	<b>Name:</b>
+	<%=h @customer.name %>
+</p>
+
+<p>
+	<b>Description:</b>
+	<%=h @customer.description %>
+</p>
+
+<p>
+	<b>Phone:</b>
+	<%=h @customer.phone %>
+</p>
+
+<p>
+	<b>Rating:</b>
+	<%=h @customer.rating %>
+</p>
+
+<% if @customer.projects.present? %>
+<p>
+	<b>Projects:</b>
+	<ul>
+		<% @customer.projects.each do |project| %>
+			<li><%=h project.name %></li>
+		<% end %>
+	</ul>
+</p>
+<% end %>
+
+<% if @customer.contracts.present? %>
+<p>
+	<b>Contracts:</b>
+	<ul>
+		<% @customer.contracts.each do |contract| %>
+			<li><%=h contract.name %></li>
+		<% end %>
+	</ul>
+</p>
+<% end %>
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %>

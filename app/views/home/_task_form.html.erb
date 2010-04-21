@@ -1,0 +1,36 @@
+<div id="task_form">
+	<h2>New task</h2>
+	<div class="part">
+		<%= error_messages_for :task %>
+		<% form_remote_for(:task, :url=>{ :action=>"save" }) do |f| %>
+
+		<p>
+			<%= f.label :title %><br />
+			<%= f.text_field :title, :size=>25 %>
+		</p>
+		<p>
+			<%= f.label :description %><br />
+			<%= f.text_area :description, :cols=>25, :rows=>3 %>
+		</p>
+		<p>
+			<%= f.label :priority %><br />
+			<%= f.select :priority, Task::PRIORITY %>
+		</p>
+		<p>
+			<%= f.label :progress %><br />
+			<%= f.select :progress, percentage_options_for_select %>
+		</p>
+		<p>
+			<%= f.label :started_at %><br />
+			<%= f.date_select :started_at %>
+		</p>
+		<p>
+			<%= f.label :project_id %><br />
+			<%= f.collection_select :project_id, Project.all, :id, :name %>
+		</p>
+		<p>
+			<%= f.submit 'Save' %>
+		</p>
+		<% end %>
+	</div>
+</div>

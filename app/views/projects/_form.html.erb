@@ -1,0 +1,29 @@
+<% form_for(@project) do |f| %>
+<%= f.error_messages %>
+
+<p>
+	<%= f.label :name %><br />
+	<%= f.text_field :name %>
+</p>
+<p>
+	<%= f.label :description %><br />
+	<%= f.text_area :description %>
+</p>
+<p>
+	<%= f.label :customer_id %><br />
+	<%= f.collection_select :customer_id, @customers,:id,:name %>
+</p>
+
+<% if @users.present? %>
+<p>
+	<b>Members</b><br />
+	<% @users.each do |user| %>
+		<%= check_box_tag "project[member_ids][]", user.id, @project.members.include?(user) %>
+		<%=h user.name%>
+	<% end %>
+</p>
+<% end %>
+<p>
+	<%= f.submit 'Save' %>
+</p>
+<% end %>
